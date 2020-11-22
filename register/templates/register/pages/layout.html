@@ -68,7 +68,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{% url 'asset' %}">
                   <span><i class="fa fa-desktop" aria-hidden="true"></i>
                   </span>
                   Assets
@@ -154,99 +154,98 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+             {% block content %}
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Dashboard</h1>
           </div>
-             {% block content %}
-             <div class="row">
-                <div class="col-4 col-md-4 col-xs-12">
-                  <div class="card bg-light mb-3 mr-5" style="max-width: 18rem;">
-                <div class="card-header">Registered Companies</div>
-                <div class="card-body">
-                  <h5 class="card-title align-items-center"> {{ company_count }} </h5>
-<!--                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-                </div>
+                 <div class="row">
+                    <div class="col-4 col-md-4 col-xs-12">
+                      <div class="card bg-light mb-3 mr-5" style="max-width: 18rem;">
+                    <div class="card-header">Registered Companies</div>
+                    <div class="card-body">
+                      <h5 class="card-title align-items-center"> {{ company_count }} </h5>
+    <!--                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                    </div>
+                  </div>
+                    </div>
+                  <div class="col-4 col-md-4 col-xs-12">
+                    <div class="card text-white bg-info mb-3 mr-5 col-4 col-md-6 col-xs-12" style="max-width: 18rem;">
+                    <div class="card-header">No. of Clients</div>
+                    <div class="card-body">
+                      <h5 class="card-title" style="align-content:center;"> {{ staff_count }} </h5>
+    <!--                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                    </div>
+                  </div>
+                  </div>
+                  <div class="col-4 col-md-4 col-xs-12">
+                  <div class="card bg-light mb-3 mr-5 col-4 col-md-6 col-xs-12" style="max-width: 18rem;">
+                    <div class="card-header">Managed Assets</div>
+                    <div class="card-body">
+                      <h5 class="card-title"> {{ asset_count }} </h5>
+    <!--                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                    </div>
+                    </div>
+                  </div>
+                 </div>
+
+
+              <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h4">Companies</h1>
               </div>
-                </div>
-              <div class="col-4 col-md-4 col-xs-12">
-                <div class="card text-white bg-info mb-3 mr-5 col-4 col-md-6 col-xs-12" style="max-width: 18rem;">
-                <div class="card-header">No. of Clients</div>
-                <div class="card-body">
-                  <h5 class="card-title" style="align-content:center;"> {{ staff_count }} </h5>
-<!--                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-                </div>
+
+              <div class="row">
+                    <div class="col-12 col-md-12 col-xs-12">
+                      <div class="card bg-light mb-3 mr-5">
+                      <div class="card-header">Registered Companies</div>
+                       <div class="card-body">
+                      {% for company in companies %}
+                         <a href="#"><h5 class="card-title"> {{ company.name }}</h5></a>
+                         {% endfor %}
+    <!--                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                    </div>
+                  </div>
+                    </div>
               </div>
+
+
+              <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h4">Clients</h1>
               </div>
-              <div class="col-4 col-md-4 col-xs-12">
-              <div class="card bg-light mb-3 mr-5 col-4 col-md-6 col-xs-12" style="max-width: 18rem;">
-                <div class="card-header">Managed Assets</div>
-                <div class="card-body">
-                  <h5 class="card-title"> {{ asset_count }} </h5>
-<!--                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-                </div>
-                </div>
+
+              <div class="row">
+                    <div class="col-12 col-md-12 col-xs-12">
+                      <div class="card bg-light mb-3 mr-5">
+                      <div class="card-header">Clients</div>
+                       <div class="card-body">
+                      {% for staff in staffs %}
+                         <a href="#"><h5 class="card-title"> {{ staff.first_name }} {{ staff.last_name }}</h5></a>
+                         {% endfor %}
+    <!--                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                    </div>
+                  </div>
+                    </div>
               </div>
-             </div>
 
 
-
-
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h4">Companies</h1>
-          </div>
-
-          <div class="row">
-                <div class="col-12 col-md-12 col-xs-12">
-                  <div class="card bg-light mb-3 mr-5">
-                  <div class="card-header">Registered Companies</div>
-                   <div class="card-body">
-                  {% for company in companies %}
-                     <a href="#"><h5 class="card-title"> {{ company.name }}</h5></a>
-                     {% endfor %}
-<!--                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-                </div>
+              <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h4">Assets</h1>
               </div>
-                </div>
-          </div>
 
-
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h4">Clients</h1>
-          </div>
-
-          <div class="row">
-                <div class="col-12 col-md-12 col-xs-12">
-                  <div class="card bg-light mb-3 mr-5">
-                  <div class="card-header">Clients</div>
-                   <div class="card-body">
-                  {% for staff in staffs %}
-                     <a href="#"><h5 class="card-title"> {{ staff.first_name }} {{ staff.last_name }}</h5></a>
-                     {% endfor %}
-<!--                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-                </div>
+              <div class="row">
+                    <div class="col-12 col-md-12 col-xs-12">
+                      <div class="card bg-light mb-3 mr-5">
+                      <div class="card-header">Managed Assets</div>
+                       <div class="card-body">
+                      {% for asset in assets %}
+                         <a href="#"><h5 class="card-title"> {{ asset.name }}</h5></a>
+                         {% endfor %}
+    <!--                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                    </div>
+                  </div>
+                    </div>
               </div>
-                </div>
-          </div>
-
-
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h4">Assets</h1>
-          </div>
-
-          <div class="row">
-                <div class="col-12 col-md-12 col-xs-12">
-                  <div class="card bg-light mb-3 mr-5">
-                  <div class="card-header">Managed Assets</div>
-                   <div class="card-body">
-                  {% for asset in assets %}
-                     <a href="#"><h5 class="card-title"> {{ asset.name }}</h5></a>
-                     {% endfor %}
-<!--                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-                </div>
-              </div>
-                </div>
-          </div>
-              {% endblock %}
+            {% endblock %}
         </main>
       </div>
     </div>

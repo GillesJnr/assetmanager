@@ -27,7 +27,11 @@ def home(request):
 
 
 def asset(request):
-    return render(request, "register/asset/index.html")
+    assets = Asset.objects.all()
+    context = {
+        'assets': assets,
+    }
+    return render(request, "register/asset/index.html", context)
 
 
 def assettype(request):
