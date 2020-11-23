@@ -56,6 +56,7 @@ class AssetType(models.Model):
     def __str__(self):
         return self.name
 
+
 class Asset(models.Model):
     name = models.CharField(max_length=90)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)

@@ -1,7 +1,14 @@
 {% extends 'register/pages/layout.html' %}
 
 {% block content %}
-<h2>Assets</h2>
+<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
+    <div class="col-10">
+        <h2>Assets</h2>
+    </div>
+    <div class="col-2">
+        <a href="{% url 'add_asset' %}" class="btn btn-success right"> Add New Asset</a>
+    </div>
+</div>
           <div class="table-responsive">
             <table class="table table-striped table-sm">
               <thead>
@@ -23,9 +30,9 @@
                   <td> {{asset.serial_number}} </td>
                   <td> {{asset.purchase_date}} </td>
                   <td>
-                      <a href=""><i class="fa fa-edit" aria-hidden="true"></i></a>
+                      <a href="{% url 'update_asset' asset.id %}"><i class="fa fa-edit" aria-hidden="true"></i></a>
                       <a href=""><i class="fa fa-copy" aria-hidden="true"></i></a>
-                      <a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
+                      <a href="{% url 'delete_asset' asset.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                   </td>
                 </tr>
                 {% endfor %}
