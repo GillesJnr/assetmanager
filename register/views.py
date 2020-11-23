@@ -85,11 +85,19 @@ def add_asset_type(request):
             return render(request, 'register/assettype/create-asset-type.html', {'form': form})
 
 
-def update_asset_type(request, id):
+def edit_asset_type(request, id):
     if request.method == "GET":
         assettype = AssetType.objects.get(pk=id)
         form = AssetTypeForm(instance=assettype)
         return render(request, 'register/assettype/create-asset-type.html', {'form': form})
+    else:
+        assettype = AssetType.objects.get(pk=id)
+        form = AssetTypeForm(request.POST, instance=assettype)
+        if form.is_valid():
+            form.save()
+            return redirect('asset_type')
+        else:
+            return render(request, 'register/assettype/create-asset-type.html', {'form': form})
 
 
 def delete_asset_type(request, id):

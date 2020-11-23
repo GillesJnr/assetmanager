@@ -51,7 +51,7 @@ class UserPassword(models.Model):
 
 
 class AssetType(models.Model):
-    name = models.CharField(max_length=90)
+    name = models.CharField(max_length=90, unique=True)
 
     def __str__(self):
         return self.name
