@@ -107,11 +107,82 @@ def delete_asset_type(request, id):
 
 
 def company(request):
-    return render(request, "register/company/index.html")
+    companies = Company.objects.all()
+    return render(request, "register/company/index.html", {'companies': companies})
+
+
+def add_company(request):
+    if request.method == "GET":
+        form = CompanyForm()
+        return render(request, "register/company/create-company.html", {'form': form})
+    else:
+        form = CompanyForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('company')
+        else:
+            return render(request, "register/company/create-company.html", {'form': form})
+
+
+
+def update_company(request, id):
+    if request.method == "GET":
+        company = Company.objects.get(pk=id)
+        form = CompanyForm(instance=company)
+        return render(request, "register/company/create-company.html", {'form': form})
+    else:
+        company = Company.objects.get(pk=id)
+        form = CompanyForm(request.POST, instance=company)
+        if form.is_valid():
+            form.save()
+            return redirect('company')
+        else:
+            return render(request, 'register/company/create-company.html', {'form': form})
+
+
+def delete_company(request, id):
+    company = Company.objects.get(pk=id)
+    company.delete()
+    return redirect('company')
 
 
 def password(request):
-    return render(request, "register/password/index.html")
+    passwords = UserPassword.objects.all()
+    return render(request, "register/password/index.html", {'passwords': passwords})
+
+
+def add_password(request):
+    if request.method == "GET":
+        form = UserPasswordForm()
+        return render(request, "register/password/user-details.html", {'form': form})
+    else:
+        form = UserPasswordForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('password')
+        else:
+            return render(request, 'register/password/user-details.html', {'form': form})
+
+
+def update_password(request, id):
+    if request.method == "GET":
+        password = UserPassword.objects.get(pk=id)
+        form = UserPasswordForm(instance=password)
+        return render(request, 'register/password/user-details.html', {'form': form})
+    else:
+        password = UserPassword.objects.get(pk=id)
+        form = UserPasswordForm(request.POST, instance=password)
+        if form.is_valid():
+            form.save()
+            return redirect('password')
+        else:
+            return render(request, 'register/password/user-details.html', {'form': form})
+
+
+def delete_password(request, id):
+    password = UserPassword.objects.get(pk=id)
+    password.delete()
+    return redirect('password')
 
 
 def service(request):

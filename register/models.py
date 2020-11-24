@@ -4,14 +4,14 @@ from django.db import models
 
 
 class ServiceType(models.Model):
-    name = models.CharField(max_length=40)
+    name = models.CharField(max_length=40, unique=True)
 
     def __str__(self):
         return self.name
 
 
 class Company(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
     location = models.CharField(max_length=30)
     phone = models.CharField(max_length=10)
     servicetype = models.ForeignKey(ServiceType, on_delete=models.CASCADE)
@@ -27,7 +27,7 @@ class Company(models.Model):
 class Staff(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     phone = models.CharField(max_length=10)
     address = models.CharField(max_length=30)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
@@ -43,7 +43,7 @@ class Staff(models.Model):
 class UserPassword(models.Model):
     name = models.ForeignKey(Staff, on_delete=models.CASCADE)
     account = models.CharField(max_length=50)
-    username = models.CharField(max_length=90)
+    username = models.CharField(max_length=90, unique=True)
     password = models.CharField(max_length=90)
 
     def __str__(self):

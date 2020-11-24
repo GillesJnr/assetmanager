@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 from .models import *
+from django import forms
 
 
 class AssetForm(ModelForm):
@@ -18,3 +19,23 @@ class AssetTypeForm(ModelForm):
         model = AssetType
         fields = '__all__'
 
+
+class CompanyForm(ModelForm):
+    class Meta:
+        model = Company
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(CompanyForm, self).__init__(*args, **kwargs)
+        self.fields['servicetype'].empty_label = 'Select Service Type'
+
+
+class UserPasswordForm(ModelForm):
+    class Meta:
+        model = UserPassword
+        fields = '__all__'
+
+
+    def __init__(self, *args, **kwargs):
+        super(UserPasswordForm, self).__init__(*args, **kwargs)
+        self.fields['name'].empty_label = 'Select User'

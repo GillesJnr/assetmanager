@@ -1,0 +1,42 @@
+{% extends 'register/pages/layout.html' %}
+
+{% block content %}
+<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
+    <div class="col-10">
+        <h2>Manage Client Passwords</h2>
+    </div>
+    <div class="col-2">
+        <a href="{% url 'add_password' %}" class="btn btn-success right"> Add Details</a>
+    </div>
+</div>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                    <th>Account</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for pass in passwords %}
+              <tr>
+                  <td> {{ pass.name }} </td>
+                  <td> {{ pass.account }} </td>
+                  <td> {{ pass.username }} </td>
+                  <td> {{ pass.password }} </td>
+
+                  <td>
+                      <a href="{% url 'update_password' pass.id %}"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                      <a href=""><i class="fa fa-copy" aria-hidden="true"></i></a>
+                      <a href="{% url 'delete_password' pass.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  </td>
+                </tr>
+                {% endfor %}
+
+              </tbody>
+            </table>
+          </div>
+{% endblock %}

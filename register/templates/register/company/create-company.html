@@ -8,15 +8,17 @@
         {{ form.name | as_crispy_field }}
     </div>
     <div class="col-12">
-       {{ form.company | as_crispy_field }}
+       {{ form.location | as_crispy_field }}
     </div>
         <div class="col-12">
-      {{ form.serial_number | as_crispy_field }}
+      {{ form.phone | as_crispy_field }}
     </div>
         <div class="col-12">
-        {{ form.type | as_crispy_field }}
+        {{ form.servicetype | as_crispy_field }}
     </div>
-    <input type="submit" class="btn btn-success">
+    <div class="col-12">
+        <input type="submit" class="btn btn-success">
+    </div>
 </form>
 </div>
 {% endblock %}
