@@ -1,0 +1,46 @@
+{% extends 'register/pages/layout.html' %}
+
+{% block content %}
+<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
+    <div class="col-10">
+        <h2>Clients</h2>
+    </div>
+    <div class="col-2">
+        <a href="{% url 'add_staff' %}" class="btn btn-success right"> Add Client</a>
+    </div>
+</div>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Company</th>
+                    <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for staff in staffs %}
+              <tr>
+                  <td> {{ staff.first_name }} </td>
+                  <td> {{ staff.last_name }} </td>
+                  <td> {{ staff.email }} </td>
+                  <td> {{ staff.phone }} </td>
+                  <td> {{ staff.address }} </td>
+                  <td> {{ staff.company }} </td>
+
+                  <td>
+                      <a href="{% url 'update_staff' staff.id %}"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                      <a href=""><i class="fa fa-copy" aria-hidden="true"></i></a>
+                      <a href="{% url 'delete_staff' staff.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  </td>
+                </tr>
+                {% endfor %}
+
+              </tbody>
+            </table>
+          </div>
+{% endblock %}

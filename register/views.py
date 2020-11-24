@@ -185,13 +185,77 @@ def delete_password(request, id):
     return redirect('password')
 
 
-def service(request):
-    return render(request, "register/service/index.html")
+def service_type(request):
+    services = ServiceType.objects.all()
+    return render(request, "register/servicetype/index.html", {'services': services})
 
 
-def servicetype(request):
-    return render(request, "register/servicetype/index.html")
+def add_service_type(request):
+    if request.method == "GET":
+        form = ServiceTypeForm()
+        return render(request, 'register/servicetype/create-service-type.html', {'form': form})
+    else:
+        form = ServiceTypeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('service_type')
+        else:
+            return render(request, 'register/servicetype/create-service-type.html', {'form': form})
+
+
+def update_service_type(request, id):
+    servicetype = ServiceType.objects.get(pk=id)
+    if request.method == "GET":
+        form = ServiceTypeForm(instance=servicetype)
+        return render(request, 'register/servicetype/create-service-type.html', {'form': form})
+    else:
+        form = ServiceTypeForm(request.POST, instance=servicetype)
+        if form.is_valid():
+            form.save()
+            return redirect('service_type')
+        else:
+            return render(request, 'register/servicetype/create-service-type.html', {'form': form})
+
+
+def delete_service_type(request, id):
+    servicetype = ServiceType.objects.get(pk=id)
+    servicetype.delete()
+    return redirect('service_type')
 
 
 def staff(request):
-    return render(request, "register/staff/index.html")
+    staffs = Staff.objects.all()
+    return render(request, "register/staff/index.html", {'staffs': staffs})
+
+
+def add_staff(request):
+    if request.method == "GET":
+        form = StaffForm()
+        return render(request, "register/staff/create-staff.html", {'form': form})
+    else:
+        form = StaffForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('staff')
+        else:
+            return render(request, "register/staff/create-staff.html", {'form': form})
+
+
+def update_staff(request, id):
+    staffs = Staff.objects.get(pk=id)
+    if request.method == "GET":
+        form = StaffForm(instance=staffs)
+        return render(request, "register/staff/create-staff.html", {'form': form})
+    else:
+        form = StaffForm(request.POST, instance=staffs)
+        if form.is_valid():
+            form.save()
+            return redirect('staff')
+        else:
+            return render(request, "register/staff/create-staff.html", {'form': form})
+
+
+def delete_staff(request, id):
+    staffs = Staff.objects.get(pk=id)
+    staffs.delete()
+    return redirect('staff')

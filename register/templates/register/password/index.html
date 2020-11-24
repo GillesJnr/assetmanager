@@ -26,11 +26,11 @@
                   <td> {{ pass.name }} </td>
                   <td> {{ pass.account }} </td>
                   <td> {{ pass.username }} </td>
-                  <td> {{ pass.password }} </td>
+                  <td id="password"> {{ pass.password }} </td>
 
                   <td>
                       <a href="{% url 'update_password' pass.id %}"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                      <a href=""><i class="fa fa-copy" aria-hidden="true"></i></a>
+                      <a href="" class="togglePassword"><i class="fa fa-copy" aria-hidden="true"></i></a>
                       <a href="{% url 'delete_password' pass.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                   </td>
                 </tr>
@@ -39,4 +39,18 @@
               </tbody>
             </table>
           </div>
+<script type="javascript">
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+    console.log('hi')
+    togglePassword.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    console.log('hi')
+    // toggle the eye slash icon
+    this.classList.toggle('.fa fa-copy');
+});
+
+</script>
 {% endblock %}

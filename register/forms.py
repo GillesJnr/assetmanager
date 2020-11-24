@@ -35,7 +35,22 @@ class UserPasswordForm(ModelForm):
         model = UserPassword
         fields = '__all__'
 
-
     def __init__(self, *args, **kwargs):
         super(UserPasswordForm, self).__init__(*args, **kwargs)
         self.fields['name'].empty_label = 'Select User'
+
+
+class ServiceTypeForm(ModelForm):
+    class Meta:
+        model = ServiceType
+        fields = '__all__'
+
+
+class StaffForm(ModelForm):
+    class Meta:
+        model = Staff
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(StaffForm, self).__init__(*args, **kwargs)
+        self.fields['company'].empty_label = 'Select Company'
